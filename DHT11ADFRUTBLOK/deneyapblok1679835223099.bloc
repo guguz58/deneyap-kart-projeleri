@@ -1,0 +1,87 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="deneyap_library" id="5C`bI`i5Z)`ZlqH9oV/s" x="316" y="111">
+    <field name="input">deneyap</field>
+  </block>
+  <block type="base_setup_loop" id="xI0DQtX+@2/`Li|pTqg@" x="335" y="171">
+    <statement name="DO">
+      <block type="deneyap_iot_init" id="L?Ejt%A+|:;Q)DraTl;5">
+        <field name="Network_ID">Superbox_Wifi_Farabi</field>
+        <field name="Network_Pass">sivasfarabi</field>
+        <field name="Cloud">io.adafruit.com</field>
+        <field name="Port">1883</field>
+        <field name="User_ID">guguz58</field>
+        <field name="User_Pass">aio_EMyB17THLiEe5wLEuczg7j7vjApc</field>
+        <next>
+          <block type="serial_init" id="DCDSwhn?]NFZJo*kSXc*">
+            <field name="PINBAUDIOS">115200</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="variables_set_init" id=".eR?ohT#haEx2}Y%Pei5">
+        <field name="VAR">nemoku</field>
+        <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+        <value name="VALUE">
+          <block type="deneyap_dht" id="Y(Y9R+C|VjJ:A*e`X6gm">
+            <field name="Pin">RX</field>
+            <field name="output">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set_init" id="sh9?Iyx_#$N1l+(}a~7J">
+            <field name="VAR">sicaklikoku</field>
+            <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+            <value name="VALUE">
+              <block type="deneyap_dht" id="Y@!z4;1P6}fs*%K]tq`n">
+                <field name="Pin">RX</field>
+                <field name="output">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="base_delay" id="@}]3Q=cQpqA{t,@N;f7%">
+                <field name="unite">m</field>
+                <value name="DELAY_TIME">
+                  <shadow type="math_number" id="))zBB}ySn1X;8cK*Qqgn">
+                    <field name="NUM">1000</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="deneyap_iot_publish2" id="cyQ$d8:n1t$SdaOfHKa%">
+                    <field name="var_name">nem</field>
+                    <value name="Value">
+                      <block type="variables_get" id="-0t{(Np`Uh|us1h+0JyH">
+                        <field name="VAR">nemoku</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="deneyap_iot_publish2" id="sCr?qPSQ7LS!.bGrv~3l">
+                        <field name="var_name">sicaklik</field>
+                        <value name="Value">
+                          <block type="variables_get" id="9)EgjXZ]yCGh;;.prHDS">
+                            <field name="VAR">sicaklikoku</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="base_delay" id="fkfM!I7R7#-e]NdadNf?">
+                            <field name="unite">m</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="!`SYHN%{M=c38t0$g)s6">
+                                <field name="NUM">5000</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
